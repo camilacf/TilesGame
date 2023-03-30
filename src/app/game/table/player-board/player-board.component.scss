@@ -1,0 +1,39 @@
+:host {
+  background-color: blanchedalmond;
+  width: 470px;
+}
+
+.turn {
+  font-weight: 500;
+  margin-bottom: -15px;
+  text-align: center;
+  font-size: large;
+  margin-top: 5px;
+  color: green;
+}
+
+.board-label {
+  margin: 20px 40px;
+  display: flex;
+  background-color: burlywood;
+  justify-content: space-evenly;
+  font-size: xx-large;
+}
+
+.play-area {
+  display: flex;
+  justify-content: space-around;
+}
+
+.line {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.tile-space {
+  margin: 10px;
+}
+
+.broken-line {
+  display: flex;
+}

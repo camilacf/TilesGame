@@ -1,0 +1,11 @@
+<div
+  class="tile"
+  [ngClass]="{
+    selectable: isSelectable,
+    empty: isEmptyBoardSpace,
+    highlited: selected
+  }"
+  [ngStyle]="{ 'background-color': color }"
+>
+  {{ label }}
+</div>

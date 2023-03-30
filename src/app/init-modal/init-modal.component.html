@@ -1,0 +1,25 @@
+<h1 mat-dialog-title>Choose number of players</h1>
+<div mat-dialog-content [formGroup]="form">
+  <mat-form-field appearance="fill">
+    <mat-label>Number of players</mat-label>
+    <input type="number" matInput formControlName="numPlayers" />
+  </mat-form-field>
+  <div class="names" formArrayName="playersList">
+    <mat-form-field
+      appearance="fill"
+      *ngFor="let p of form.controls.playersList.controls; let i = index"
+    >
+      <input matInput [formControl]="p" />
+    </mat-form-field>
+  </div>
+</div>
+<div class="button" mat-dialog-actions>
+  <button
+    mat-flat-button
+    color="primary"
+    (click)="savePlayers()"
+    cdkFocusInitial
+  >
+    Start
+  </button>
+</div>

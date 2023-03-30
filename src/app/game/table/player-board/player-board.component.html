@@ -1,0 +1,44 @@
+<div class="turn" *ngIf="isTurn">It's your turn!</div>
+<div class="board-label">
+  <div class="player-name">
+    {{ player.name }}
+  </div>
+  <div class="point-count">
+    {{ player.points }}
+  </div>
+</div>
+<div class="play-area">
+  <div class="building-area">
+    <div
+      class="line"
+      *ngFor="let buildingLine of board?.buildingLines; let i = index"
+    >
+      <div class="tile-space" *ngFor="let space of buildingLine?.tiles">
+        <app-tiles
+          [isSelectable]="canSelectBuilSpace(i)"
+          (click)="selectBuildSpace(i)"
+          [color]="space.color"
+        ></app-tiles>
+      </div>
+    </div>
+  </div>
+  <div class="constructed-area">
+    <div class="line" *ngFor="let constructedLine of board?.contructedLines">
+      <div class="tile-space" *ngFor="let space of constructedLine.spaces">
+        <app-tiles
+          [color]="space.color"
+          [isEmptyBoardSpace]="isConstructedEmpty(constructedLine, space)"
+        ></app-tiles>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="broken-line">
+  <div class="tile-space" *ngFor="let space of board?.brokenLine">
+    <app-tiles
+      [isSelectable]="isTurn && tilesSelected.length > 0"
+      (click)="selectBrokenSpace()"
+      [color]="space.tile?.color"
+    ></app-tiles>
+  </div>
+</div>

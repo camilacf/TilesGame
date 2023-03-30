@@ -1,0 +1,18 @@
+.tile {
+  width: 25px;
+  height: 25px;
+  text-align: center;
+  line-height: 25px;
+}
+
+.tile.selectable {
+  cursor: pointer;
+}
+
+.tile.empty {
+  opacity: 0.2;
+}
+
+.highlited {
+  border: 1px solid black;
+}

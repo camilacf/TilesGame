@@ -1,0 +1,12 @@
+<div #circleContainer class="c">
+  <div class="tiles" *ngIf="!isEmpty">
+    <app-tiles
+      #tilesEle
+      *ngFor="let t of tiles"
+      [color]="t.color"
+      [isSelectable]="true"
+      [selected]="t.selected"
+      (click)="toggleSelection(t)"
+    ></app-tiles>
+  </div>
+</div>

@@ -1,0 +1,25 @@
+:host {
+  background: darkgray;
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  margin: 25px 50px;
+}
+
+.spare {
+  width: 500px;
+  height: 150px;
+  float: left;
+}
+
+.circles {
+  display: flex;
+  justify-content: space-between;
+}
+
+.boards {
+  display: flex;
+  justify-content: space-around;
+}
