@@ -1,0 +1,5 @@
+::ng-deep .mdc-dialog__content,
+::ng-deep .mdc-dialog__content > :first-child,
+::ng-deep .mdc-dialog__content > :last-child {
+  text-align: center;
+}

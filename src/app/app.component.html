@@ -1,6 +1,6 @@
-<!--<app-introduction
+<app-introduction
   (start)="gameStarted = $event"
   *ngIf="!gameStarted"
-></app-introduction>-->
+></app-introduction>
 
-<app-game></app-game>
+<app-game *ngIf="gameStarted"></app-game>

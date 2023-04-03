@@ -1,7 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Player, PlayersService } from 'src/players.service';
+import { Player, PlayersService } from 'src/app/services/players.service';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-init-modal',
@@ -48,12 +49,12 @@ export class InitModalComponent implements OnInit {
   }
 
   savePlayers() {
-    console.log(this.form.valid);
     if (this.form.valid) {
       let players: Player[] = [];
+      let order = _.shuffle(_.range(this.form.controls.playersList.length));
       this.form.controls.playersList.value.forEach((p, i) => {
         p = p || '';
-        players.push({ name: p, order: i, points: 0 });
+        players.push({ name: p, id: i, order: order[i], points: 0 });
       });
       this.playersService.setPlayers(players);
       this.dialogRef.close();

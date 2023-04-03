@@ -11,8 +11,8 @@ import {
   ViewChild,
   ViewChildren,
 } from '@angular/core';
-import { Tile } from '../../tiles/tile';
-import { TilesService } from '../../tiles/tiles.service';
+import { TileMovesService } from 'src/app/services/tile-moves.service';
+import { Tile, TilesService } from 'src/app/services/tiles.service';
 
 @Component({
   selector: 'app-circle',
@@ -31,13 +31,16 @@ export class CircleComponent implements OnChanges {
     ElementRef<HTMLElement>
   >;
 
-  constructor(private tilesService: TilesService) {}
+  constructor(
+    private tilesService: TilesService,
+    private tileMovesService: TileMovesService
+  ) {}
 
   ngOnChanges(changes: SimpleChanges) {
     this.isEmpty = this.tiles.length == 0;
     setTimeout(() => {
       if (this.circleContainer && this.tilesEle) {
-        this.tilesService.placeTiles(
+        this.tileMovesService.placeTiles(
           this.circleContainer.nativeElement,
           this.tiles,
           this.tilesEle.toArray().map((sp) => sp.nativeElement),

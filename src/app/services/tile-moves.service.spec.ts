@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { TableService } from './table.service';
+import { TileMovesService } from './tile-moves.service';
 
-describe('TableService', () => {
-  let service: TableService;
+describe('TileMovesService', () => {
+  let service: TileMovesService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(TableService);
+    service = TestBed.inject(TileMovesService);
   });
 
   it('should be created', () => {

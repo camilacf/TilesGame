@@ -1,7 +1,7 @@
-import { Tile } from '../../tiles/tile';
+import { Tile } from 'src/app/services/tiles.service';
 
 export interface Board {
-  player: string;
+  playerId: number;
   buildingLines: BuildingLine[];
   contructedLines: ConstructedLine[];
   brokenLine: BrokenSpace[];

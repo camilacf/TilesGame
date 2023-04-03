@@ -1,0 +1,8 @@
+<p mat-dialog-title>Game Over</p>
+<div mat-dialog-content>
+  <h1>{{ winner.name }} wins!</h1>
+  <h2>With {{ winner.points }} points</h2>
+</div>
+<div class="button" mat-dialog-actions>
+  <button mat-flat-button (click)="restart()">Play again</button>
+</div>

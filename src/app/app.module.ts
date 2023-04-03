@@ -16,6 +16,7 @@ import { PlayerBoardComponent } from './game/table/player-board/player-board.com
 import { TableComponent } from './game/table/table.component';
 import { TilesComponent } from './game/tiles/tiles.component';
 import { CircleComponent } from './game/table/circle/circle.component';
+import { EndModalComponent } from './end-modal/end-modal.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { CircleComponent } from './game/table/circle/circle.component';
     TableComponent,
     TilesComponent,
     CircleComponent,
+    EndModalComponent,
   ],
   imports: [
     BrowserModule,

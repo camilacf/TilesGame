@@ -1,40 +1,13 @@
 import { Injectable } from '@angular/core';
-import { colors, Tile } from './tile';
 import * as _ from 'lodash';
+import { Tile } from './tiles.service';
+
 const tilesize = 25;
 
 @Injectable({
   providedIn: 'root',
 })
-export class TilesService {
-  tiles: Tile[] = [];
-  tableTilesPos: { y: number; x: number }[] = [];
-  firstTile: Tile = { color: 'white', index: -1, selected: false };
-  constructor() {}
-
-  isSameTile(t1: Tile, t2: Tile) {
-    return t1.color == t2.color && t1.index == t2.index;
-  }
-
-  initGame() {
-    colors.forEach((c: string) => {
-      for (let i = 0; i < 20; i++) {
-        this.tiles.push({ color: c, index: i, selected: false });
-      }
-    });
-  }
-
-  drawTiles(n: number): Tile[] {
-    let sorted: Tile[] = [];
-    if (this.tiles.length >= n) {
-      for (let i = 0; i < n; i++) {
-        let index = Math.random() * this.tiles.length;
-        sorted = sorted.concat(this.tiles.splice(index, 1));
-      }
-    }
-    return sorted;
-  }
-
+export class TileMovesService {
   calcSpaces(metric: number, tileSize: number) {
     return Math.floor(metric / tileSize);
   }
@@ -73,11 +46,6 @@ export class TilesService {
           : ypos[i >= 2 ? Math.abs((i % 2) - 1) : i] * tilesize * 1.5 + top) +
         'px';
       tilesRef[i].style.transform = 'rotate(' + rot + 'deg)';
-
-      this.tableTilesPos.push({
-        x: xpos[i],
-        y: ypos[i],
-      });
     });
   }
 
