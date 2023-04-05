@@ -3,7 +3,11 @@
   [ngClass]="{
     selectable: isSelectable,
     empty: isEmptyBoardSpace,
-    highlited: selected
+    highlited: selected,
+    greentile: color == 'green',
+    rosetile: color == 'teal',
+    coltile: color == 'yellow',
+    olivetile: color == 'blue'
   }"
   [ngStyle]="{ 'background-color': color }"
 >

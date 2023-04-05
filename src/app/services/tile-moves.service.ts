@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { ElementRef, Injectable, QueryList } from '@angular/core';
 import * as _ from 'lodash';
 import { Tile } from './tiles.service';
 
@@ -13,13 +13,27 @@ export class TileMovesService {
   }
 
   placeTiles(
-    container: HTMLElement,
+    container: ElementRef<HTMLElement> | undefined,
     tiles: Tile[],
-    tilesRef: HTMLElement[],
+    tilesRef: QueryList<ElementRef<HTMLElement>> | undefined,
     isSpare: boolean
   ) {
-    let { top, left, xpos, ypos, rot } = this.getMeasures(container, isSpare);
-    this.setSpareTiles(tilesRef, tiles, top, left, xpos, ypos, rot, isSpare);
+    if (tilesRef && container && tilesRef.length > 0) {
+      let { top, left, xpos, ypos, rot } = this.getMeasures(
+        container.nativeElement,
+        isSpare
+      );
+      this.setSpareTiles(
+        tilesRef.toArray().map((sp) => sp.nativeElement),
+        tiles,
+        top,
+        left,
+        xpos,
+        ypos,
+        rot,
+        isSpare
+      );
+    }
   }
 
   moveTile(tile: Tile) {}
@@ -64,10 +78,10 @@ export class TileMovesService {
     let height = container.offsetHeight;
     let top = isSpare
       ? container.offsetTop + 15
-      : Math.ceil(container.offsetTop + (r - width / 2)) + 2;
+      : Math.ceil(container.offsetTop + (r - width / 2)) + height * 0.08;
     let left = isSpare
       ? container.offsetLeft + 15
-      : Math.ceil(container.offsetLeft + (r - width / 2)) + 2;
+      : Math.ceil(container.offsetLeft + (r - width / 2)) + width * 0.08;
     let gRows = this.calcSpaces(width, tilesize);
     let gCols = this.calcSpaces(height, tilesize);
     let xpos = isSpare ? _.shuffle(_.range(gRows)) : _.shuffle(_.range(2));

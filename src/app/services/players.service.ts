@@ -33,8 +33,7 @@ export class PlayersService {
 
   setPlayers(playerList: Player[]) {
     this.updatedPlayersList = playerList.slice();
-    console.log(this.updatedPlayersList);
-    this.playersSub.next(playerList);
+    this.updateList();
   }
 
   changeTurn() {
@@ -55,9 +54,12 @@ export class PlayersService {
   newGame() {
     this.updatedPlayersList = this.updatedPlayersList.map((p) => ({
       ...p,
-      point: 0,
+      points: 0,
     }));
-    this.playersSub.next(this.updatedPlayersList);
+    this.playersSub.next([]);
+    setTimeout(() => {
+      this.updateList();
+    }, 200);
   }
 
   firstPlayerTurn() {
@@ -73,6 +75,7 @@ export class PlayersService {
     if (p) {
       p.points = points;
     }
+    this.updateList();
   }
 
   updateOrder(firstPlayerId: number) {
@@ -82,7 +85,6 @@ export class PlayersService {
     }));
     let first = this.updatedPlayersList.findIndex((p) => p.id == firstPlayerId);
     let order = 0;
-    console.log('update', first);
     for (let i = first; i < this.getPlayersNum(); i++) {
       if (this.updatedPlayersList[i].order < 0) {
         this.updatedPlayersList[i].order = order;
@@ -94,6 +96,10 @@ export class PlayersService {
         break;
       }
     }
+    this.updateList();
+  }
+
+  updateList() {
     this.playersSub.next(this.updatedPlayersList);
   }
 }

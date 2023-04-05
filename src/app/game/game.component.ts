@@ -66,11 +66,16 @@ export class GameComponent implements OnInit, AfterViewInit {
     });
     this.gameService.gameState.subscribe((state) => {
       if (state == 2) {
-        let auxPlayers = this.players.slice();
+        this.tilesService.resetTiles();
+      } else if (state == 3) {
+        this.gameService.initGame(this.playerService.getPlayersNum());
         this.players = [];
-        this.players = auxPlayers;
-        this.gameService.initGame(this.players.length);
-        this.initRound();
+        this.playerService.newGame();
+        setTimeout(() => {
+          this.players = this.playerService.getPlayers();
+          console.log(this.players);
+          this.initRound();
+        }, 300);
       }
     });
 
@@ -86,14 +91,13 @@ export class GameComponent implements OnInit, AfterViewInit {
 
   initRound() {
     this.tilesService.drawTiles(this.gameService.circlesQnt, 4);
-    if (this.spareTiles && this.spareContainer && this.spareTiles.length > 0) {
-      this.tileMovesService.placeTiles(
-        this.spareContainer.nativeElement,
-        this.tableTiles,
-        this.spareTiles.toArray().map((sp) => sp.nativeElement),
-        true
-      );
-    }
+    this.tileMovesService.placeTiles(
+      this.spareContainer,
+      this.tableTiles,
+      this.spareTiles,
+      true
+    );
+
     this.playerService.firstPlayerTurn();
   }
 
@@ -128,18 +132,12 @@ export class GameComponent implements OnInit, AfterViewInit {
     this.tilesService.toSpare();
 
     setTimeout(() => {
-      if (
-        this.spareTiles &&
-        this.spareContainer &&
-        this.spareTiles.length > 0
-      ) {
-        this.tileMovesService.placeTiles(
-          this.spareContainer.nativeElement,
-          this.tableTiles,
-          this.spareTiles.toArray().map((sp) => sp.nativeElement),
-          true
-        );
-      }
+      this.tileMovesService.placeTiles(
+        this.spareContainer,
+        this.tableTiles,
+        this.spareTiles,
+        true
+      );
     }, 200);
   }
 }

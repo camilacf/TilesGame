@@ -2,7 +2,13 @@
 <div mat-dialog-content [formGroup]="form">
   <mat-form-field appearance="fill">
     <mat-label>Number of players</mat-label>
-    <input type="number" matInput formControlName="numPlayers" />
+    <input
+      type="number"
+      matInput
+      max="4"
+      min="2"
+      formControlName="numPlayers"
+    />
   </mat-form-field>
   <div class="names" formArrayName="playersList">
     <mat-form-field

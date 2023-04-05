@@ -51,7 +51,19 @@ export class InitModalComponent implements OnInit {
   savePlayers() {
     if (this.form.valid) {
       let players: Player[] = [];
-      let order = _.shuffle(_.range(this.form.controls.playersList.length));
+
+      let firstInd = Math.round(
+        Math.random() * (this.form.controls.playersList.length - 1)
+      );
+      let order = Array(this.form.controls.playersList.length)
+        .fill(0)
+        .map((o, i) => {
+          if (i - firstInd >= 0) {
+            return i - firstInd;
+          } else {
+            return this.form.controls.playersList.length - firstInd + i;
+          }
+        });
       this.form.controls.playersList.value.forEach((p, i) => {
         p = p || '';
         players.push({ name: p, id: i, order: order[i], points: 0 });

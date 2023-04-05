@@ -42,7 +42,6 @@ export class PlayerBoardComponent implements OnInit {
     private cd: ChangeDetectorRef
   ) {}
   ngOnInit() {
-    console.log('init board');
     this.board = this.boardService.initBoard(this.player);
     this.playerService.curPlayerSub.subscribe((cur) => {
       this.isTurn = cur.id == this.player.id;
@@ -95,8 +94,7 @@ export class PlayerBoardComponent implements OnInit {
   }
 
   countPoints() {
-    console.log('point count');
-    for (let i = 0; i < this.board.buildingLines.length; i++) {
+    this.board.buildingLines.forEach((line, i) => {
       let colored = this.board.buildingLines[i].tiles.filter(
         (t) => t.color != 'grey'
       );
@@ -110,7 +108,7 @@ export class PlayerBoardComponent implements OnInit {
           selected: false,
         }));
       }
-    }
+    });
     this.player.points =
       this.player.points > this.boardService.countBrokenPoints(this.board)
         ? this.player.points - this.boardService.countBrokenPoints(this.board)
@@ -123,10 +121,10 @@ export class PlayerBoardComponent implements OnInit {
       tile: undefined,
     }));
     this.playerService.updatePoints(this.player.id, this.player.points);
-    this.gameService.addPlayerCounted();
     if (this.boardService.playerFinishedRow) {
       this.gameService.endGame();
     }
+    this.gameService.addPlayerCounted();
   }
 
   moveToConstructed(line: number, color: string) {

@@ -1,8 +1,9 @@
 .tile {
-  width: 25px;
-  height: 25px;
+  border-radius: 3px;
+  width: 2vw;
+  height: 2vw;
   text-align: center;
-  line-height: 25px;
+  line-height: 2vw;
 }
 
 .tile.selectable {
@@ -10,9 +11,28 @@
 }
 
 .tile.empty {
-  opacity: 0.2;
+  opacity: 0.4;
 }
 
 .highlited {
   border: 1px solid black;
+}
+
+.greentile {
+  background-image: url(../../../assets/verde.jpg);
+  background-size: cover;
+}
+
+.rosetile {
+  background-image: url(../../../assets/rose.jpg);
+  background-size: cover;
+}
+
+.coltile {
+  background-image: url(../../../assets/col.jpg);
+  background-size: cover;
+}
+
+.olivetile {
+  background-color: olivedrab !important;
 }

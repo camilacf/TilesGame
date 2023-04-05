@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import * as _ from 'lodash';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { BuildingLine } from '../game/table/player-board/board';
-export const colors: string[] = ['green', 'blue', 'red', 'yellow', 'teal'];
+export const colors: string[] = ['green', 'blue', 'yellow', 'red', 'teal'];
 
 export interface Tile {
   color: string;
@@ -44,17 +44,16 @@ export class TilesService {
 
   drawTiles(circles: number, n: number) {
     let sorted: Tile[][] = [];
-    if (this.tiles.length >= n) {
-      for (let c = 0; c < circles; c++) {
-        sorted.push([]);
-        for (let i = 0; i < n; i++) {
-          let index = Math.random() * this.tiles.length;
-          sorted[c] = sorted[c].concat(this.tiles.splice(index, 1));
-        }
-      }
-    } else {
-      this.tiles = this.tileTrash.slice();
+    if (this.tiles.length < n * circles) {
+      this.tiles = this.tiles.concat(this.tileTrash.slice());
       this.tileTrash = [];
+    }
+    for (let c = 0; c < circles; c++) {
+      sorted.push([]);
+      for (let i = 0; i < n; i++) {
+        let index = Math.random() * this.tiles.length;
+        sorted[c] = sorted[c].concat(this.tiles.splice(index, 1));
+      }
     }
     this.roundTilesSub.next(sorted);
     this.spareTilesSub.next([this.firstTile]);
@@ -122,11 +121,6 @@ export class TilesService {
 
   emptySelected() {
     this.selectedTilesSub.next([]);
-  }
-
-  setTileVarAndSub(tileList: { sub: Subject<any>; value: any[] }, val: any) {
-    tileList.sub.next(val);
-    tileList.value = val;
   }
 
   toSpare() {

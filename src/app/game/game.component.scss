@@ -6,6 +6,7 @@
 .game-table {
   background: darkgray;
   display: flex;
+  width: fit-content;
   flex-direction: column;
 }
 
@@ -21,10 +22,12 @@
 
 .circles {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .boards {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-around;
 }

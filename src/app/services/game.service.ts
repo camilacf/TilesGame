@@ -6,6 +6,7 @@ enum gameStates {
   play,
   countPoints,
   end,
+  restart,
 }
 @Injectable({
   providedIn: 'root',
@@ -20,29 +21,28 @@ export class GameService {
   constructor() {}
 
   initGame(playersNum: number) {
-    console.log('init game');
     this.circlesQnt = playersNum == 2 ? 5 : playersNum == 3 ? 7 : 9;
   }
 
   finishGame() {}
 
   startRound() {
-    if (!this.gameFinished) {
-      console.log('new round');
+    if (this.gameState.getValue() != 3) {
       this.gameState.next(gameStates.play);
       this.counted.next(0);
-    } else {
-      this.gameState.next(gameStates.end);
     }
   }
 
   endRound() {
-    console.log('end round');
     this.gameState.next(gameStates.countPoints);
   }
 
   endGame() {
-    this.gameFinished = true;
+    this.gameState.next(gameStates.end);
+  }
+
+  newGame() {
+    this.gameState.next(gameStates.restart);
   }
 
   addPlayerCounted() {

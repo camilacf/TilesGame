@@ -34,8 +34,12 @@
   </div>
 </div>
 <div class="broken-line">
-  <div class="tile-space" *ngFor="let space of board?.brokenLine">
+  <div
+    class="tile-space"
+    *ngFor="let space of board?.brokenLine; let i = index"
+  >
     <app-tiles
+      [hidden]="i > 6"
       [isSelectable]="isTurn && tilesSelected.length > 0"
       (click)="selectBrokenSpace()"
       [color]="space.tile?.color"

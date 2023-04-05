@@ -21,13 +21,16 @@ export class AppComponent implements OnInit {
     private playerService: PlayersService
   ) {}
   ngOnInit(): void {
-    this.gameService.gameState.subscribe((state) => {
-      if (state == 2) {
+    this.gameService.counted.subscribe((playersReady) => {
+      if (
+        this.gameService.gameState.getValue() == 2 &&
+        this.players.length == playersReady
+      ) {
         this.dialog.open(EndModalComponent, { width: '500px' });
       }
     });
     this.playerService.playersSub.subscribe((p) => {
-      if (p.length == 0) {
+      if (p.length == 0 && this.gameService.gameState.getValue() == 0) {
         this.dialog.open(InitModalComponent, { width: '500px' });
       } else {
         this.players = p;

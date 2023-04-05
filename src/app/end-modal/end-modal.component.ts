@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { InitModalComponent } from '../init-modal/init-modal.component';
+import { GameService } from '../services/game.service';
 import { Player, PlayersService } from '../services/players.service';
 import { TilesService } from '../services/tiles.service';
 
@@ -10,12 +11,13 @@ import { TilesService } from '../services/tiles.service';
   styleUrls: ['./end-modal.component.scss'],
 })
 export class EndModalComponent implements OnInit {
-  winner: Player = { name: '', id: 0, order: 0, points: 0 };
+  winner: Player | undefined = { name: '', id: 0, order: 0, points: 0 };
   constructor(
     public dialogRef: MatDialogRef<InitModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private playersService: PlayersService,
-    private tileService: TilesService
+    private tileService: TilesService,
+    private gameService: GameService
   ) {}
 
   ngOnInit(): void {
@@ -37,7 +39,6 @@ export class EndModalComponent implements OnInit {
   }
 
   restart() {
-    this.playersService.newGame();
-    this.tileService.resetTiles();
+    this.gameService.newGame();
   }
 }

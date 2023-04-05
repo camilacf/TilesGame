@@ -42,18 +42,22 @@ export class BoardService {
             tiles: [],
           };
         }),
-      brokenLine: Array(7)
+      brokenLine: Array(14)
         .fill(0)
         .map((x, i) => {
-          if (i <= 1) {
+          if (i <= 1 || (i > 6 && i <= 8)) {
             return { pointLoss: 1 };
-          } else if (i <= 4) {
+          } else if (i <= 4 || (i > 8 && i <= 11)) {
             return { pointLoss: 2 };
           } else {
             return { pointLoss: 3 };
           }
         }),
     };
+  }
+
+  resetBoard(player: Player) {
+    return this.initBoard(player);
   }
 
   getCurColor(tilesSelected: Tile[]) {
@@ -64,7 +68,10 @@ export class BoardService {
 
   isSameColorBuild(line: number, tilesSelected: Tile[], board: Board) {
     let curColor = this.getCurColor(tilesSelected);
-    return board.buildingLines[line].tiles[0].color == curColor;
+    return (
+      board.buildingLines[line].tiles[0].color == curColor &&
+      board.buildingLines[line].tiles.some((t) => this.isEmpty(t))
+    );
   }
 
   isSameColorConstructed(line: number, tilesSelected: Tile[], board: Board) {
@@ -171,14 +178,14 @@ export class BoardService {
 
   findAdjacentTiles(line: number, column: number, board: Board): number {
     let points = this.checkAdjacentTile(line, column, board) ? 1 : 0;
-    for (let i = column + 1; i < 5; i++) {
+    for (let i = column + 1; i <= 5; i++) {
       if (board.contructedLines[line].tiles.find((t) => t.column == i)) {
         points++;
       } else {
         break;
       }
     }
-    for (let i = column - 1; i > -1; i--) {
+    for (let i = column - 1; i > 0; i--) {
       if (board.contructedLines[line].tiles.find((t) => t.column == i)) {
         points++;
       } else {
@@ -199,19 +206,18 @@ export class BoardService {
         break;
       }
     }
-    console.log(board.playerId, line, column, points);
     return points;
   }
 
   checkAdjacentTile(line: number, column: number, board: Board): boolean {
     let hasCol = false;
     let hasLine = false;
-    if (column + 1 < 5) {
+    if (column + 1 <= 5) {
       hasCol = board.contructedLines[line].tiles.some(
         (t) => t.column == column + 1
       );
     }
-    if (!hasCol && column - 1 >= 0) {
+    if (!hasCol && column - 1 >= 1) {
       hasCol = board.contructedLines[line].tiles.some(
         (t) => t.column == column - 1
       );
@@ -226,7 +232,6 @@ export class BoardService {
         (t) => t.column == column
       );
     }
-
     return hasCol && hasLine;
   }
 

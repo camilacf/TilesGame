@@ -1,6 +1,7 @@
 :host {
   background-color: blanchedalmond;
-  width: 470px;
+  width: 40vw;
+  margin: 0 15px 10px 15px;
 }
 
 .turn {
@@ -36,4 +37,6 @@
 
 .broken-line {
   display: flex;
+  margin: 0 4%;
+  justify-content: space-around;
 }

@@ -39,14 +39,12 @@ export class CircleComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges) {
     this.isEmpty = this.tiles.length == 0;
     setTimeout(() => {
-      if (this.circleContainer && this.tilesEle) {
-        this.tileMovesService.placeTiles(
-          this.circleContainer.nativeElement,
-          this.tiles,
-          this.tilesEle.toArray().map((sp) => sp.nativeElement),
-          false
-        );
-      }
+      this.tileMovesService.placeTiles(
+        this.circleContainer,
+        this.tiles,
+        this.tilesEle,
+        false
+      );
     }, 200);
   }
 
