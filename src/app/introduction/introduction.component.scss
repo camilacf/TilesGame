@@ -1,3 +1,29 @@
+:host {
+  width: 100%;
+}
+
+p {
+  font-size: x-large;
+  font-weight: 500;
+  text-align: center;
+  padding-top: 2%;
+  margin-top: 0;
+}
+
 .container {
+  background-color: darkgray;
+  height: 100%;
+}
+
+.instructions {
   display: flex;
+  padding: 5%;
+  height: 40vh;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+button {
+  width: fit-content;
+  align-self: center;
 }

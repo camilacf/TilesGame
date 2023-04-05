@@ -31,7 +31,10 @@ export class AppComponent implements OnInit {
     });
     this.playerService.playersSub.subscribe((p) => {
       if (p.length == 0 && this.gameService.gameState.getValue() == 0) {
-        this.dialog.open(InitModalComponent, { width: '500px' });
+        this.dialog.open(InitModalComponent, {
+          disableClose: true,
+          width: '500px',
+        });
       } else {
         this.players = p;
       }

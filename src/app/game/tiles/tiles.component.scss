@@ -4,6 +4,8 @@
   height: 2vw;
   text-align: center;
   line-height: 2vw;
+  font-weight: 500;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
 }
 
 .tile.selectable {
@@ -12,6 +14,7 @@
 
 .tile.empty {
   opacity: 0.4;
+  box-shadow: none;
 }
 
 .highlited {
@@ -24,12 +27,16 @@
 }
 
 .rosetile {
-  background-image: url(../../../assets/rose.jpg);
+  background-image: url(../../../assets/red.jpg);
+  background-size: cover;
+}
+.coltile {
+  background-image: url(../../../assets/escuro.jpg);
   background-size: cover;
 }
 
-.coltile {
-  background-image: url(../../../assets/col.jpg);
+.one {
+  background-image: url(../../../assets/tile.jpg);
   background-size: cover;
 }
 

@@ -25,7 +25,9 @@ export class InitModalComponent implements OnInit {
     public dialogRef: MatDialogRef<InitModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private playersService: PlayersService
-  ) {}
+  ) {
+    dialogRef.disableClose = true;
+  }
 
   ngOnInit(): void {
     this.form.controls.numPlayers.valueChanges.subscribe((val) => {
