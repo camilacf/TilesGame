@@ -4,6 +4,8 @@ import { Player, PlayersService } from 'src/app/services/players.service';
 import { EndModalComponent } from './end-modal/end-modal.component';
 import { InitModalComponent } from './init-modal/init-modal.component';
 import { GameService } from './services/game.service';
+import { initializeApp } from 'firebase/app';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -21,6 +23,15 @@ export class AppComponent implements OnInit {
     private playerService: PlayersService
   ) {}
   ngOnInit(): void {
+    // Import the functions you need from the SDKs you need
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+
+    // Your web app's Firebase configuration
+    const firebaseConfig = environment.config;
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+
     this.gameService.counted.subscribe((playersReady) => {
       if (
         this.gameService.gameState.getValue() == 2 &&

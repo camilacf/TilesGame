@@ -1,6 +1,6 @@
 :host {
   background-color: blanchedalmond;
-  width: 40vw;
+  width: 44vw;
   margin: 0 15px 10px 15px;
 }
 
@@ -32,9 +32,12 @@
 }
 
 .tile-space {
-  margin: 10px;
+  margin: 1vw;
 }
-
+@media only screen and (max-width: 600px) {
+  .tile-space {
+  }
+}
 .broken-line {
   display: flex;
   margin: 0 4%;

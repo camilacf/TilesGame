@@ -2,7 +2,7 @@ import { ElementRef, Injectable, QueryList } from '@angular/core';
 import * as _ from 'lodash';
 import { Tile } from './tiles.service';
 
-const tilesize = 25;
+const tilesize = window.innerWidth / 50;
 
 @Injectable({
   providedIn: 'root',
