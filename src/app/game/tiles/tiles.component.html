@@ -1,5 +1,6 @@
 <div
   class="tile"
+  class="{{ color }}"
   [ngClass]="{
     selectable: isSelectable,
     empty: isEmptyBoardSpace,
@@ -10,7 +11,9 @@
     coltile: color == 'yellow',
     olivetile: color == 'blue'
   }"
-  [ngStyle]="{ 'background-color': color }"
+  [ngStyle]="{
+    'background-color': color
+  }"
 >
   {{ label }}
 </div>

@@ -1,3 +1,12 @@
+<mat-toolbar>
+  <mat-toolbar-row>
+    <span class="spacer"></span>
+    <mat-icon class="icon" aria-hidden="false" aria-label="Help">help</mat-icon>
+    <mat-icon class="icon" aria-hidden="false" aria-label="Config"
+      >more_vert</mat-icon
+    >
+  </mat-toolbar-row>
+</mat-toolbar>
 <app-introduction
   (start)="gameStarted = $event"
   *ngIf="!gameStarted"

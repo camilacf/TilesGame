@@ -1,0 +1,24 @@
+.names {
+  display: flex;
+  flex-direction: column;
+}
+
+.button {
+  padding: 24px;
+  justify-content: end;
+}
+h1 {
+  font-size: 1.5em;
+  font-weight: 500;
+  text-align: center;
+}
+
+p {
+  font-size: 16px;
+  margin-left: 7%;
+  color: rgb(0, 0, 0, 0.6);
+}
+
+.mat-mdc-dialog-content {
+  margin: 0 7%;
+}

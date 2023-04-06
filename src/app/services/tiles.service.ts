@@ -10,6 +10,14 @@ export interface Tile {
   selected: boolean;
 }
 
+export interface ColorsHelper {
+  green: string;
+  blue: string;
+  yellow: string;
+  red: string;
+  teal: string;
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -18,6 +26,13 @@ export class TilesService {
   firstTile: Tile = { color: 'white', index: -1, selected: false };
   roundTilesSub: BehaviorSubject<Tile[][]> = new BehaviorSubject<Tile[][]>([]);
   tileTrash: Tile[] = [];
+  images: ColorsHelper = {
+    green: '',
+    blue: '',
+    yellow: '',
+    red: '',
+    teal: '',
+  };
   spareTilesSub: BehaviorSubject<Tile[]> = new BehaviorSubject<Tile[]>([]);
   selectedTilesSub: BehaviorSubject<Tile[]> = new BehaviorSubject<Tile[]>([]);
   selectedCircleIndex: number = 0;
@@ -159,5 +174,20 @@ export class TilesService {
     for (let i = 0; i < buildingLine.tiles.length - 1; i++) {
       this.tileTrash.push(buildingLine.tiles[i]);
     }
+  }
+
+  saveCustomImages(imagesUrls: string[]) {
+    let imgSet: ColorsHelper = {
+      green: '',
+      blue: '',
+      yellow: '',
+      red: '',
+      teal: '',
+    };
+    (Object.keys(imgSet) as (keyof typeof imgSet)[]).forEach((key, index) => {
+      imgSet[key] = imagesUrls[index] || '';
+    });
+    console.log(imgSet);
+    this.images = imgSet;
   }
 }

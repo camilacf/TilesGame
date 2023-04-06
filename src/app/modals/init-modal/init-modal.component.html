@@ -1,0 +1,43 @@
+<span *ngIf="!isCustomizing">
+  <h1 mat-dialog-title>Choose number of players</h1>
+  <div mat-dialog-content [formGroup]="form">
+    <mat-form-field appearance="fill">
+      <mat-label>Number of players</mat-label>
+      <input
+        type="number"
+        matInput
+        max="4"
+        min="2"
+        formControlName="numPlayers"
+      />
+    </mat-form-field>
+    <div class="names" formArrayName="playersList">
+      <mat-form-field
+        appearance="fill"
+        *ngFor="let p of form.controls.playersList.controls; let i = index"
+      >
+        <input matInput [formControl]="p" />
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="button" mat-dialog-actions>
+    <button mat-flat-button color="accent" (click)="isCustomizing = true">
+      Customize tiles
+    </button>
+    <button
+      mat-flat-button
+      color="primary"
+      (click)="savePlayers()"
+      cdkFocusInitial
+    >
+      Start
+    </button>
+  </div>
+</span>
+<span *ngIf="isCustomizing">
+  <h1 mat-dialog-title>Upload up to 5 images to show on the tiles</h1>
+  <p>The image must be squared so it can fit correctly.</p>
+  <div mat-dialog-content>
+    <app-upload-img (uploaded)="isCustomizing = false"></app-upload-img>
+  </div>
+</span>

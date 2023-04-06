@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Player, PlayersService } from 'src/app/services/players.service';
@@ -10,6 +10,9 @@ import * as _ from 'lodash';
   styleUrls: ['./init-modal.component.scss'],
 })
 export class InitModalComponent implements OnInit {
+  @Output() start: EventEmitter<boolean> = new EventEmitter<boolean>();
+  isCustomizing: boolean = false;
+
   form = new FormGroup({
     numPlayers: new FormControl<number>(2, [
       Validators.max(4),

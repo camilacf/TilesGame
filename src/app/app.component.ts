@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Player, PlayersService } from 'src/app/services/players.service';
-import { EndModalComponent } from './end-modal/end-modal.component';
-import { InitModalComponent } from './init-modal/init-modal.component';
+import { EndModalComponent } from './modals/end-modal/end-modal.component';
+import { InitModalComponent } from './modals/init-modal/init-modal.component';
 import { GameService } from './services/game.service';
 import { initializeApp } from 'firebase/app';
 import { environment } from 'src/environments/environment';
+import { WelcomeModalComponent } from './modals/welcome-modal/welcome-modal.component';
+import { DialogRef } from '@angular/cdk/dialog';
 
 @Component({
   selector: 'app-root',
@@ -42,12 +44,19 @@ export class AppComponent implements OnInit {
     });
     this.playerService.playersSub.subscribe((p) => {
       if (p.length == 0 && this.gameService.gameState.getValue() == 0) {
-        this.dialog.open(InitModalComponent, {
-          disableClose: true,
-          width: '500px',
+        const dialogRef = this.dialog.open(WelcomeModalComponent, {
+          width: '60vw',
+        });
+        dialogRef.afterClosed().subscribe((result) => {
+          console.log('Choose players');
+          this.dialog.open(InitModalComponent, {
+            disableClose: true,
+            width: '60vw',
+          });
         });
       } else {
         this.players = p;
+        this.gameStarted = true;
       }
     });
   }

@@ -1,9 +1,9 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { InitModalComponent } from '../init-modal/init-modal.component';
-import { GameService } from '../services/game.service';
-import { Player, PlayersService } from '../services/players.service';
-import { TilesService } from '../services/tiles.service';
+import { GameService } from '../../services/game.service';
+import { Player, PlayersService } from '../../services/players.service';
+import { TilesService } from '../../services/tiles.service';
 
 @Component({
   selector: 'app-end-modal',

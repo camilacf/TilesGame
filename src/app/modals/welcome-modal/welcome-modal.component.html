@@ -1,0 +1,49 @@
+<span *ngIf="!onInstructions">
+  <div mat-dialog-title>
+    <div style="width: 90%">
+      <h1>Welcome to the Tiles Game</h1>
+      <p>
+        This is a web-app based on the
+        <a href="https://en.wikipedia.org/wiki/Azul_(board_game)"
+          >Azul board game</a
+        >, but totally independent from it's publisher Plan B Games.
+      </p>
+    </div>
+    <mat-button-toggle-group name="language" aria-label="Lenguage">
+      <mat-button-toggle value="bold">PT</mat-button-toggle>
+      <mat-button-toggle value="italic">EN</mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+
+  <div mat-dialog-content>
+    <span>
+      If you already know how to play, all you need to know here is that you
+      must click on one of the tiles of the color you want to pick and then
+      click on the row you want to put them.
+      <button mat-flat-button color="accent" (click)="play()">Play</button>
+    </span>
+    <span
+      >If you have never played Azul, click on the Instructions button bellow.
+      <button mat-flat-button color="primary" (click)="onInstructions = true">
+        Instructions
+      </button>
+    </span>
+  </div>
+</span>
+
+<span *ngIf="onInstructions">
+  <div mat-dialog-title>
+    <div style="width: 90%">
+      <h1>Instructions</h1>
+      <p></p>
+    </div>
+    <mat-button-toggle-group name="language" aria-label="Lenguage">
+      <mat-button-toggle value="bold">PT</mat-button-toggle>
+      <mat-button-toggle value="italic">EN</mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+
+  <div mat-dialog-content>
+    <button mat-flat-button color="accent" (click)="play()">Play</button>
+  </div>
+</span>
